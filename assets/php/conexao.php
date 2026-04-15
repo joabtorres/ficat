@@ -1,31 +1,17 @@
-<?php 
+<?php
 
-
-$banco = "";
-$usuario = "";
-$senha = "";
 $host = "localhost";
+$usuario = "root";
+$senha = "";
+$banco = "fitcat";
 
-// $banco = "fichacatalog";
-// $usuario = "root";
-// $senha = "";
-// $host = "localhost";
+// Criar conexão
+$conexao = mysqli_connect($host, $usuario, $senha, $banco);
 
-
-
-$conexao = @mysql_connect($host,$usuario,$senha);
-if (!($conexao)){
-    print("<script language=JavaScript>
-          alert(\"Não foi possível conectar ao Banco de Dados.\");
-          </script>");
-	echo $conexao;
-    exit;
+// Verificar conexão
+if (!$conexao) {
+    die("Erro na conexão: " . mysqli_connect_error());
 }
 
-
-$db = mysql_select_db($banco,$conexao) or
-    die("<script language=JavaScript>alert(\"Tabela inexistente!\");</script>");    
-
-mysql_set_charset("utf8");
-
-?>
+// Definir charset
+mysqli_set_charset($conexao, "utf8");
